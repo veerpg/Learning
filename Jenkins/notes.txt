@@ -1,0 +1,67 @@
+What is Jenkins?
+Jenkins is a tool that is used for automation.
+It is mainly an open-source server that allows all the developers to build, test and deploy software.
+It is written in Java and runs on java only.
+By using Jenkins we can make a continuous integration of projects(jobs) or end-to-endpoint automation
+-------------------------------------------------------------
+
+Why Organizations use Jenkins?
+Jenkins facilitates the automation of several stages of the software development lifecycle, including application development, testing, and deployment. Operating within servlet containers like Apache Tomcat, the technology is server-based.Continuous delivery (CD) and integration (CI) pipelines can be created and managed with Jenkins. The development, testing, and deployment of software applications are automated using CI/CD pipelines. You will be able to release software more regularly and with fewer problems if you do this.
+jenkins is flexible.
+You can add the n no.of plugins you want to add to the jenkins.
+You can automate the proceses of CI/CD pipelines of all the projects.
+-------------------------------------------------------------
+
+What is Pipeline?
+In computing, a pipeline is a set of stages or processes linked together to form a processing system. Each stage in the pipeline takes an input, processes it in accordance with a set of rules, and then sends the outputs to the stage that follows. Frequently, the pipeline’s overall output is its final step’s output. like the procedures outlined below
+Test code
+Build Application
+Push Repository
+Deploy to Server
+All the steps mentioned above will perform in sequence one after the other if any step/stage get failed it will not move forward to another step/stage until the previous step got a success
+-------------------------------------------------------------
+
+
+What is Jenkins Continuous Integration (CI)?
+Jenkins Continuous integration means whenever new code is committed to remote repositories like GitHub, GitLab, etc. Continuous Integration (CI) will continuously build, tested, and merged into a shared repository.
+Benefits of Continuous Integration (CI)
+We can maintain the reports of the projects
+Deployments can be made within the given time
+Bugs can be found quickly.
+-------------------------------------------------------------
+
+What is Jenkins Continuous Deployment/Delivery (CD)?
+Continuous Deployment
+Continuous Deployment means automating the further stages of the pipeline automatically or manually deploying the application/code to different environments like Dev, Test, and Production. Automating the build is the main component of Continuous Integration and Continuous Deployment.
+
+Continuous Delivery
+Each and every build that passed all automated tests and was able to be fully automated and delivered into production only required one click of human intervention is called Continuous Delivery.
+-------------------------------------------------------------
+
+What is Jenkins Pipeline?
+DevOps professionals mostly work with pipelines because pipelines can automate the processes like building, testing, and deploying the application. Doing manually by UI takes lots of time and effort which will affect productivity. With the help of Continuous Integration / Continuous Deployment (CI/CD) Pipeline scripts we can automate the whole process which will increase productivity and save lots of time for the organization and can deliver quality applications to the end users.To know more about how to build the CI/CD pipeline please refer to the How to Make a CI-CD Pipeline in Jenkins?.
+
+What is Jenkins Multi Configuration Projects?
+You can run different builds of the same project with different configurations when you create a Jenkins Multi-Configuration Project (MCP).
+-------------------------------------------------------------
+
+Installation of Jenkins in windows:
+Before installing Jenkins you should have already installed java on your device as above said it works on java, so it’s important to install:
+sudo apt update
+sudo apt install openjdk-17-jre
+
+Install Jenkins:
+curl -fsSL https://pkg.jenkins.io/debian/jenkins.io-2023.key | sudo tee \
+  /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+  https://pkg.jenkins.io/debian binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt-get update
+sudo apt-get install jenkins
+--------------------------------------------------------------
+
+What is Jenkins Agent?
+Jenkins agents are machines or containers where Jenkins jobs are executed. They can be on the same machine as the Jenkins controller or distributed across multiple machines.
+--------------------------------------------------------------
+
+

@@ -21,4 +21,5 @@ A---B---C (upstream)
 		\
 		D (your branch)
 To Pull changes done in Remote Repository : git pull origin <branch-name in which chnages done "Abhishek">
+To Merge into One Branch to other : Got to Branch in which chnage are not reflecting (git checkout <Target_Branch>) --> git merge <Source_Branch_Name>
 

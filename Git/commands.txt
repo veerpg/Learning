@@ -7,3 +7,12 @@ To push local branch to a remote repository : git push -u origin "new-branch-nam
 To Add files/Folder for commit: git add <specific files> / <. for all files/folder>
 To commit files/Folder for added in local repository : git commit -m "Technical meaningful message"
 To check which remote repository local repository linked with : git remote -v
+To check which files are in staged area :  git status
+To check what was the diff in files after modified : git diff <filename>
+To restore unstaged the files : git restore -staged <filename>
+To unstaged the files : git reset <filename>
+To restore the changes done in file : git restore <filename>
+git reset: Primarily used for moving HEAD and modifying the staging area.
+git restore: Used to restore files in the working directory or to unstage files without affecting HEAD.
+
+

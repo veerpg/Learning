@@ -1,0 +1,9 @@
+Git Command:
+-----------------
+To initialiaze git in local repository : git init 
+To check which branch i'm in : git status
+To create another branch : git checkout -b "new-branch-name" (-b means create new branch)
+To push local branch to a remote repository : git push -u origin "new-branch-name"
+To Add files/Folder for commit: git add <specific files> / <. for all files/folder>
+To commit files/Folder for added in local repository : git commit -m "Technical meaningful message"
+To check which remote repository local repository linked with : git remote -v

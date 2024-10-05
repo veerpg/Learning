@@ -15,3 +15,8 @@ To restore the changes done in file : git restore <filename>
 git reset: Primarily used for moving HEAD and modifying the staging area.
 git restore: Used to restore files in the working directory or to unstage files without affecting HEAD.
 To Clone/Pull full project from Remote Repository : git clone https://github.com/your_username/myproject.git
+A fast-forward merge happens when there are no diverging changes between your current branch and the upstream branch (the branch you’re pulling from).
+A---B---C---D (your branch)
+A---B---C (upstream)
+		\
+		D (your branch)

@@ -63,5 +63,204 @@ sudo apt-get install jenkins
 What is Jenkins Agent?
 Jenkins agents are machines or containers where Jenkins jobs are executed. They can be on the same machine as the Jenkins controller or distributed across multiple machines.
 --------------------------------------------------------------
+simple jenkinsfile.
+
+Jenkinsfile
+pipeline {
+    agent any
+    stages {
+        stage('Clone') {
+            steps {
+                // Clone the repository
+                git url: 'https://github.com/veerpg/Learning.git', branch: 'Abhishek', credentialsId: 'github'
+            }
+        }
+        stage('Build') {
+            steps {
+                // Compile the Java code
+                sh 'javac Java/HelloWorld.java'
+            }
+        }
+        stage('Test') {
+            steps {
+                // Run the compiled Java program
+                sh 'java -cp Java HelloWorld'  // Corrected to run the compiled class
+            }
+        }
+        stage('Deploy') {
+            steps {
+                // Deployment steps can go here
+                echo 'Deploying application...'
+            }
+        }
+    }
+}
+
+Jenkinsfile for MS Configuration
+pipeline {
+    agent { label 'slave1' }  // Replace with your specific agent or use `any`
+    stages {
+        stage('Check JDK Installation') {
+            steps {
+                script {
+                    try {
+                        // Check if javac is available
+                        sh 'javac -version'
+                    } catch (Exception e) {
+                        echo "JDK is not installed or javac is not found. Attempting to install OpenJDK 11..."
+
+                        // Install OpenJDK 11 (Ubuntu/Debian example)
+                        sh '''
+                        sudo apt update
+                        sudo apt install -y openjdk-11-jdk
+                        '''
+
+                        // Verify installation
+                        sh 'javac -version'  // Check again to confirm installation
+                    }
+                }
+            }
+        }
+        stage('Clone') {
+            steps {
+                script {
+                    try {
+                        // Clone the repository
+                        git url: 'https://github.com/veerpg/Learning.git', branch: 'Abhishek', credentialsId: 'github'
+                    } catch (Exception e) {
+                        error "Failed to clone repository: ${e.message}"
+                    }
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                script {
+                    try {
+                        // Compile the Java code
+                        sh 'javac Java/*.java'  // Compile all Java files in the directory
+                    } catch (Exception e) {
+                        error "Build failed: ${e.message}"
+                    }
+                }
+            }
+        }
+        stage('Test') {
+            steps {
+                script {
+                    try {
+                        // Run the compiled Java program
+                        sh 'java -cp Java HelloWorld'  // Adjust the class name if necessary
+                    } catch (Exception e) {
+                        error "Test execution failed: ${e.message}"
+                    }
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                script {
+                    echo 'Deploying application...'
+                    // Add deployment commands here
+                }
+            }
+        }
+    }
+    post {
+        always {
+            echo 'Pipeline completed.'
+        }
+        success {
+            echo 'Pipeline succeeded!'
+        }
+        failure {
+            echo 'Pipeline failed.'
+        }
+    }
+}
+
+Jenkinsfile for MS with Docker input
+pipeline {
+    agent { label 'slave1' }  // Specify your Jenkins agent label here
+    stages {
+        stage('Clone Repository') {
+            steps {
+                script {
+                    try {
+                        // Clone the repository
+                        git url: 'https://github.com/veerpg/Learning.git', branch: 'Abhishek', credentialsId: 'github'
+                    } catch (Exception e) {
+                        error "Failed to clone repository: ${e.message}"
+                    }
+                }
+            }
+        }
+        stage('List Files') {
+            steps {
+                script {
+                    // List files in the workspace to confirm the structure
+                    sh 'ls -R'
+                }
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    try {
+                        // Build the Docker image using the Dockerfile in the Java directory
+                        sh 'docker build -t my-java-app -f Java/Dockerfile Java'
+                    } catch (Exception e) {
+                        error "Docker build failed: ${e.message}"
+                    }
+                }
+            }
+        }
+        stage('Run Tests') {
+            steps {
+                script {
+                    try {
+                        // Run tests inside the Docker container
+                        sh 'docker run --rm my-java-app java -cp /app HelloWorld'
+                    } catch (Exception e) {
+                        error "Test execution failed: ${e.message}"
+                    }
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                script {
+                    try {
+                        echo 'Deploying application...'
+                        // Add your deployment commands here
+                    } catch (Exception e) {
+                        error "Deployment failed: ${e.message}"
+                    }
+                }
+            }
+        }
+    }
+    post {
+        always {
+            echo 'Pipeline completed.'
+        }
+        success {
+            echo 'Pipeline succeeded!'
+        }
+        failure {
+            echo 'Pipeline failed.'
+        }
+    }
+}
 
 
+
+------------------------------------------------------------------
+imp links : https://www.youtube.com/watch?v=hD9TyAtfWlA
+
+
+docker run -d --name jenkins-slave2 \
+  -e JENKINS_URL=http://16.171.39.243:8080/ \
+  -e JENKINS_AGENT_NAME=jenkins-slave2 \
+  -e JENKINS_SECRET=<your-agent-secret> \
+  jenkins/inbound-agent
